@@ -1,30 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { AppState } from './store';
-import { DemoComponent } from './components';
-import { demoGet, demoPost } from './actions/demo-actions'
-import './App.css';
+import * as React from 'react';
+import { Route } from 'react-router';
+import Layout from './components/Layout';
+import Home from './components/Home';
+import Counter from './components/Counter';
+import FetchData from './components/FetchData';
 
-interface AppComponentProps {
-  // Props are defined here
-}
+import './custom.css'
 
-class App extends Component<AppComponentProps> {
-  render() {
-    return (
-      <div className="App">
-        <DemoComponent />
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state: AppState) => ({
-  demoReducer: state.demoReducer
-  // Any other reducers go here
-});
-
-export default connect(
-  mapStateToProps,
-  { demoGet, demoPost }
-)(App);
+export default () => (
+    <Layout>
+        <Route exact path='/' component={Home} />
+        <Route path='/counter' component={Counter} />
+        <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
+    </Layout>
+);
